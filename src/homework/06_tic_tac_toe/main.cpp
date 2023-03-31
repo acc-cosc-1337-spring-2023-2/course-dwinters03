@@ -12,9 +12,12 @@ int main()
 	int menu_variable;
 	bool valid_player;
 	bool quit = false;
+
+	cout << "Welcome to the TicTacToe Program!\n";
+
 	do
 	{
-		cout << "Welcome to the TicTacToe Program!\n1. Play Tic Tac Toe\n2. Quit\n";
+		cout << "\n1. Play Tic Tac Toe\n2. Quit\n";
 		cin >> menu_variable;
 		if (menu_variable == 2)
 		{
@@ -47,6 +50,14 @@ int main()
 				tictactoe.display_board();
 			}
 			while (tictactoe.game_over() == false);
+			if (tictactoe.get_winner() == "C" )
+			{
+				cout << "\nTIE!\n";
+			}
+			else
+			{
+				cout << "\n" << tictactoe.get_winner() << " wins!!\n";
+			}
 		}
 		
 	} 
