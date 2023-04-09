@@ -4,11 +4,20 @@
 
 using namespace std;
 
+/*I've decided to just take the poor grade on this one, not because I want to but because I do not have time and I am struggling 
+to understand what is going on. I would really appreciate it if you could maybe go over some of my mistakes in class to help me 
+understand what's going on? I can't properly do office time because my mic won't work right and it's probably too late in the 
+semester for getting a new one to make a difference.*/
+
 int main() 
 {
 	TicTacToe tictactoe;
+	TicTacToeManager manager;
 	string player;
 	int position;
+	int x = 0;
+	int o = 0;
+	int t = 0;
 	int menu_variable;
 	bool valid_player;
 	bool quit = false;
@@ -17,11 +26,15 @@ int main()
 
 	do
 	{
-		cout << "\n1. Play Tic Tac Toe\n2. Quit\n";
+		cout << "\n1. Play Tic Tac Toe\n2. View Game History\n3. Quit\n";
 		cin >> menu_variable;
-		if (menu_variable == 2)
+		if (menu_variable == 3)
 		{
 			quit = true;
+		}
+		else if (menu_variable == 2)
+		{
+			cout << manager;
 		}
 		else
 		{
@@ -44,12 +57,12 @@ int main()
 			tictactoe.start_game(player);
 			do
 			{
-				cout << "What position would you like to fill?\n";
-				cin >> position;
-				tictactoe.mark_board(position);
-				tictactoe.display_board();
+				cin >> tictactoe;
+				cout << "\n";
+				cout << tictactoe << "\n";
 			}
 			while (tictactoe.game_over() == false);
+
 			if (tictactoe.get_winner() == "C" )
 			{
 				cout << "\nTIE!\n";
@@ -59,6 +72,8 @@ int main()
 				cout << "\n" << tictactoe.get_winner() << " wins!!\n";
 			}
 		}
+		manager.save_game(tictactoe);
+        manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
 		
 	} 
 	while (quit != true);
@@ -67,3 +82,4 @@ int main()
 	
 	return 0;
 }
+
