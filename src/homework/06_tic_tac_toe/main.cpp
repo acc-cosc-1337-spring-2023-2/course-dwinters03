@@ -4,10 +4,7 @@
 
 using namespace std;
 
-/*I've decided to just take the poor grade on this one, not because I want to but because I do not have time and I am struggling 
-to understand what is going on. I would really appreciate it if you could maybe go over some of my mistakes in class to help me 
-understand what's going on? I can't properly do office time because my mic won't work right and it's probably too late in the 
-semester for getting a new one to make a difference.*/
+
 
 int main() 
 {
@@ -71,9 +68,11 @@ int main()
 			{
 				cout << "\n" << tictactoe.get_winner() << " wins!!\n";
 			}
+			manager.save_game(tictactoe);
+        	manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
 		}
-		manager.save_game(tictactoe);
-        manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
+		//manager.save_game(tictactoe);
+        //manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
 		
 	} 
 	while (quit != true);
