@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 
 using namespace std;
 
@@ -8,7 +10,8 @@ using namespace std;
 
 int main() 
 {
-	TicTacToe tictactoe;
+	unique_ptr<TicTacToe> game3 = make_unique<TicTacToe3>();
+	unique_ptr<TicTacToe> game4 = make_unique<TicTacToe4>();
 	TicTacToeManager manager;
 	string player;
 	int position;
@@ -35,6 +38,8 @@ int main()
 		}
 		else
 		{
+			cout << "\nWould you like to play on a 3x3 grid or a 4x4 grid?\n1.3x3 Grid\n2. 4x4 Grid\n";
+			cin >> menu_variable;			
 			do
 			{
 				cout << "Will you be playing as X or O?\n";
@@ -50,35 +55,58 @@ int main()
 			
 			} 
 			while (valid_player != true);
-		
-			tictactoe.start_game(player);
-			do
-			{
-				cin >> tictactoe;
-				cout << "\n";
-				cout << tictactoe << "\n";
-			}
-			while (tictactoe.game_over() == false);
 
-			if (tictactoe.get_winner() == "C" )
+			if (menu_variable == 1)
 			{
-				cout << "\nTIE!\n";
+				game3->start_game(player);
+				do
+				{
+					cin >> *game3;
+					cout << "\n";
+					cout << *game3 << "\n";
+				}
+				while (game3->game_over() == false);
+
+				if (game3->get_winner() == "C" )
+				{
+					cout << "\nTIE!\n";
+				}
+				else
+				{
+					cout << "\n" << game3 -> get_winner() << " wins!!\n";
+				}
+				manager.save_game(game3);
+        		manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
+			}
+			else if (menu_variable == 2)
+			{
+				game4 -> start_game(player);
+				do
+				{
+					cin >> *game4;
+					cout << "\n";
+					cout << *game4 << "\n";
+				}
+				while (game4 -> game_over() == false);
+
+				if (game4 -> get_winner() == "C" )
+				{
+					cout << "\nTIE!\n";
+				}
+				else
+				{
+					cout << "\n" << game4 -> get_winner() << " wins!!\n";
+				}
+				manager.save_game(game4);
+        		manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
 			}
 			else
 			{
-				cout << "\n" << tictactoe.get_winner() << " wins!!\n";
+				cout << "Invalid input.";
 			}
-			manager.save_game(tictactoe);
-        	manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
 		}
-		//manager.save_game(tictactoe);
-        //manager.get_winner_total(o, x, t); //don't remove, makes infinite loop happen
-		
-	} 
+	}
 	while (quit != true);
-	
-	
-	
+
 	return 0;
 }
-
