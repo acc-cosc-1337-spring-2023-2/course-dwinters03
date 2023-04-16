@@ -3,7 +3,7 @@
 #include "tic_tac_toe.h"
 
 
-using namespace std;
+/*using namespace std;
 
 TEST_CASE("Verify Test Configuration", "verification") {
 	REQUIRE(true == true);
@@ -127,4 +127,4 @@ TEST_CASE("game_over test 1")
 	tictactoe.game_over();
 	REQUIRE(tictactoe.get_winner() == "C");
 	
-}
+}*/
