@@ -1,18 +1,24 @@
-#include <iostream>
+#include <vector>
+#include <fstream>
+#include <memory>
 #include <string>
+#include <iostream>
+#include <math.h>
+#include "tic_tac_toe_data.h"
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
 
+
 using namespace std;
-
-
 
 int main() 
 {
+	TicTacToeData data(string("filename.txt"));
+	TicTacToeManager manager(data);
+	//unique_ptr<TicTacToe> board = make_unique<TicTacToe>();
 	unique_ptr<TicTacToe> game3 = make_unique<TicTacToe3>();
 	unique_ptr<TicTacToe> game4 = make_unique<TicTacToe4>();
-	TicTacToeManager manager;
 	string player;
 	int position;
 	int x = 0;

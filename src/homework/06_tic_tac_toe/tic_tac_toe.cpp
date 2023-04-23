@@ -1,7 +1,10 @@
-#include <iostream>
-#include <string>
 #include <vector>
+#include <fstream>
+#include <memory>
+#include <string>
+#include <iostream>
 #include <math.h>
+#include "tic_tac_toe_data.h"
 #include "tic_tac_toe.h"
 
 using namespace std;
@@ -35,27 +38,6 @@ string TicTacToe::get_player() const
 {
     return player;
 }
-
-/*void TicTacToe::display_board() const
-{
-    for (int i = 0; i < 3; i++)
-    {
-        for(int j = 0; j <3; j++)
-        {
-            cout << pegs.at(i * 3 + j);
-            if (j < 2)
-            {
-                cout << " | ";
-            }
-
-        }
-        cout << endl;
-        if (i < 2)
-        {
-            cout << "---------" << endl;
-        }
-    }
-}*/
 
 void TicTacToe::set_next_player()
 {
@@ -195,6 +177,13 @@ istream& operator>>(istream& in, TicTacToe& game)
     return in;
 }
 
+//TicTacToe::TicTacToe(std::vector<std::string> p, std::string win) : pegs(p), winner(win){}
+
+std::vector<std::string> TicTacToe::get_pegs() const
+{
+    return pegs;
+}
+
 void TicTacToeManager::save_game(std::unique_ptr<TicTacToe>& games)
 {
     update_winner_count(games -> get_winner());
@@ -233,6 +222,11 @@ void TicTacToeManager::get_winner_total(int& o, int& w, int& t)
     }
 }
 
+/*TicTacToeData TicTacToeManager::data() const
+{
+    return TicTacToeData();
+}*/
+
 void TicTacToeManager::update_winner_count(string winner)
 {
     //TicTacToe tictactoe;
@@ -249,4 +243,30 @@ void TicTacToeManager::update_winner_count(string winner)
     {
         ties++;
     }
+}
+
+TicTacToeManager::TicTacToeManager(TicTacToeData& d)
+{
+    std::vector<std::unique_ptr<TicTacToe>> games = d.get_games();
+    for (int i = 0; i < games.size(); i++)
+    {
+        if (games[games.size() - 1 == 'X'])
+        {
+            x_win++;
+        }
+        else if (games[games.size() - 1 == 'O'])
+        {
+            o_win++;
+        }
+        else if (games[games.size() - 1 == 'C'])
+        {
+            ties++;
+        }
+    }
+}
+
+TicTacToeManager::~TicTacToeManager()
+{
+    data -> save_games(games);
+
 }
